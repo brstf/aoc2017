@@ -4,12 +4,12 @@
   "Returns the sequence of indices executed by executing the program with steps represented by the given sequence"
   [step-seq mod-fn]
   (loop [index 0
-         step-map  (zipmap (range) step-seq)
-         stack []]
+         step-map (transient (zipmap (range) step-seq))
+         stack (transient [])]
     (if-let [step-val (get step-map index)] 
-      (recur (+ index step-val) (update step-map index (mod-fn step-val))
-             (conj stack index))
-      stack)))
+      (recur (+ index step-val) (assoc! step-map index ((mod-fn step-val) step-val))
+             (conj! stack index))
+      (persistent! stack))))
 
 (defn step-count
   "Given a step sequence, return the number of steps executed by the \"CPU\" until the program terminates"
