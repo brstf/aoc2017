@@ -10,3 +10,6 @@
 
 (defn str->table [s]
   (read-lines s #(map str->int (clojure.string/split % #"\s"))))
+
+(defn boomerange [n]
+  (cycle (concat (range 0 (dec n)) (range (dec n) 0 -1))))
