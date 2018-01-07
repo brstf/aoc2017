@@ -13,3 +13,7 @@
 
 (defn boomerange [n]
   (cycle (concat (range 0 (dec n)) (range (dec n) 0 -1))))
+
+(def index->char-keyword
+  "Given an index from 0-25, return a keyword of the letter of that index, e.g. 0 = :a, 1 = :b, etc."
+  (comp keyword str char (partial + 97)))
