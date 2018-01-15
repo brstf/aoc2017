@@ -82,7 +82,7 @@
 (defn parse-input
   "Parses the puzzle input into a map from pc to function that takes the program state and returns the next program state"
   [fn-map s]
-  (zipmap (range) (read-lines s (partial parse-fn2 fn-map))))
+  (zipmap (range) (read-lines s (partial parse-fn fn-map))))
 
 (def common-fns {:set reg-set :add reg-add :mul reg-mul :mod reg-mod :jgz jgz})
 (def part1-fn-map (merge common-fns {:snd reg-sound :rcv reg-recover}))
